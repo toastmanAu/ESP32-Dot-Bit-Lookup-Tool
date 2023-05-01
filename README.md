@@ -18,4 +18,8 @@ ESP Mail Client by Mobizt
 LovyanGFX by lovyan03
 TFT_eSPI by Bodmer
 
+To install the sketch copy the contents of "src" to a new folder in your main Arduino folder called "dotBitSearch_v1". Then you need to copy the contents of "images" (just the folders inside not the images folder itself) to you FAT32 formatted SD card. Two additional folders will be created when saving "qrcodes" and "records". "qrcodes" will hold the generated bitmaps, while "records" holds the saved .json files of .bit records.
+
 Upon initial startup there are a couple things to remember, you must go to settings and setup your WiFi details, the tool has built in WiFi scanning so you just need to select your network and then enter the password. While not connected to WiFi the tool will attempt to auto reconnect every 30 seconds once you have entered a password, during this time the screen will be inoperable/unresponsive for up to 5 seconds while establishing connection. Sending QR codes via email requires you to input your email account details aswell as the SMTP server details for your account. These details are stored within the ESP32's EEPROM upon saving. 
+
+
