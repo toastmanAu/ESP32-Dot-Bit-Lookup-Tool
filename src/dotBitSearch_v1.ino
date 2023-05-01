@@ -235,7 +235,7 @@ void loop(void) {
   int XPOS;
   int YPOS;
 
-  if (NOWIFI && millis() - WIFITIMER > 30000) {
+  if (NOWIFI && millis() - WIFITIMER > 30000 && AUTHOR_PASSWORD != "NONE" && AUTHOR_EMAIL != "NONE") {
     char TSSID[50];
     for (int p = 0; p < WIFI_SSID.length(); p++) {
       TSSID[p] = WIFI_SSID.charAt(p);
