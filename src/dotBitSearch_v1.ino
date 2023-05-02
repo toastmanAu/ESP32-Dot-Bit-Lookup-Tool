@@ -36,6 +36,7 @@
 //Variables
 String WIFI_SSID = "NONE";
 String WIFI_PASSWORD = "NONE";
+bool NETWORK_EXISTS = false;
 int led_pin[3] = { 17, 4, 16 };   //Onboard RGB Not used yet...
 int spk_pin = 26;                 //Internal Speaker Pin on Suntron 2.8" Esp32-HMI 
 int CUR_PAGE = 0;                 //0-Main, 1-Search Keyboard, 2-, 3-, 4-, 5-, 6-, 7-, 8-, 9-,10-,11-
@@ -234,8 +235,11 @@ void setup(void) {
 void loop(void) {
   int XPOS;
   int YPOS;
-
-  if (NOWIFI && millis() - WIFITIMER > 30000 && AUTHOR_PASSWORD != "NONE" && AUTHOR_EMAIL != "NONE") {
+  int AUTOCONNECT_TIMEOUT = 5000;
+  if (NOWIFI && millis() - WIFITIMER > 30000 && WIFI_PASSWORD != "NONE" && WIFI_SSID != "NONE") {
+    if(NETWORK_EXISTS){
+      AUTOCONNECT_TIMEOUT = 20000;
+    }
     char TSSID[50];
     for (int p = 0; p < WIFI_SSID.length(); p++) {
       TSSID[p] = WIFI_SSID.charAt(p);
@@ -250,7 +254,7 @@ void loop(void) {
     while (WiFi.status() != WL_CONNECTED) {
       Serial.print(".");
       delay(500);
-      if (millis() - WIFITIMER > 5000) {
+      if (millis() - WIFITIMER > AUTOCONNECT_TIMEOUT) {
         Serial.println("WiFi Not Connected");
         NOWIFI = true;
         WiFi.disconnect();
@@ -3810,18 +3814,22 @@ void LOAD_SSID() {
         playTouch(5);
         WIFI_SSID = SSIDS[WIFI_POS];
         ISDONE = true;
+        NETWORK_EXISTS = true;
       } else if (XPOS > 83 && XPOS < 236 && YPOS > 159 && YPOS < 181 && n > 1 + WIFI_POS) {  //record 2
         playTouch(5);
         WIFI_SSID = SSIDS[WIFI_POS + 1];
         ISDONE = true;
+        NETWORK_EXISTS = true;
       } else if (XPOS > 83 && XPOS < 236 && YPOS > 181 && YPOS < 203 && n > 2 + WIFI_POS) {  //record 3
         playTouch(5);
         WIFI_SSID = SSIDS[WIFI_POS + 2];
         ISDONE = true;
+        NETWORK_EXISTS = true;
       } else if (XPOS > 83 && XPOS < 236 && YPOS > 203 && YPOS < 230 && n > 3 + WIFI_POS) {  //record 4
         playTouch(5);
         WIFI_SSID = SSIDS[WIFI_POS + 3];
         ISDONE = true;
+        NETWORK_EXISTS = true;
       } else if (XPOS < 35 && YPOS > 70 && YPOS < 102 && WIFI_POS > 3) {  //previous page
         playTouch(6);
         WIFI_POS = WIFI_POS - 4;
