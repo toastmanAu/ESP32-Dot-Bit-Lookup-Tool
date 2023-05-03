@@ -5,6 +5,9 @@ Has been designed to run on an ESP32 HMI (Human Machine Interface) which is an a
 
 The Code has been written using the Arduino 2.1 IDE but should work fine on the legacy version or on Platform.IO. There are several required libraries to make the sketch work. Also required is an SD card as this is where both the GUI images and Saved Records/Bitmaps will be stored. 8GB should be enough to store several thousand .bit records and their associated bitmap QR files, i beleive the ESP32 can handle a maximum size of 32GB but please refer to the manufacturers specs. The code is also desined to utilise the speaker out JST connector on the HMI board giving audible feedback to touch input but the sketch will run fine without having this speaker attached. I've used a 1w speaker which is a little on the loud side but i've yet to integrate anything in the way of volume control. Be aware the draw of a 1 watt speaker can make the screen dim if not using a sufficient power source, not debilitating but noticable.
 
+Demo Video of the ESP-Dot-Bit-Lookup-Tool
+https://youtu.be/i9GtNlogzb0
+
 For a guide to setting up your ESP32-HMI device go here and see the setup guide by MakerFabs https://wiki.makerfabs.com/Sunton_ESP32_2.8_inch_240x320_TFT_with_Touch.html
 
 The above guide recommends Arduino 1.8, if you're just starting out and haven't got a personal preference of IDE i would recommend going with the newer 2.1 IDE as it adds several valuable features included improved highlighting, auto-promting for functions and definition lookups.
